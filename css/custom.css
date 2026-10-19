@@ -1,21 +1,108 @@
 /* Минимальные дополнения к Bootstrap */
 body {
-  min-height: 100vh;
+    min-height: 100vh;
 }
 
-.placeholder-box {
-  min-height: 240px;
-}
-
-/* Preserve product proportions while keeping the grid uniform. */
 .card-img-top {
-  height: 320px;
-  object-fit: contain;
-  background-color: #f8f9fa;
+    height: 320px;
+    object-fit: contain;
+    background-color: #f8f9fa;
 }
 
 .product-image {
-  width: 100%;
-  max-height: 640px;
-  object-fit: contain;
+    width: 100%;
+    max-height: 640px;
+    object-fit: contain;
+}
+
+.brand-logo {
+    position: relative;
+    display: block;
+    width: 240px;
+    max-width: 100%;
+    height: 70px;
+    overflow: hidden;
+    border-radius: 6px;
+    background: #fff;
+}
+
+.brand-logo img {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: auto;
+    transform: translateY(-50%);
+}
+
+.drop-carousel {
+    background: #212529;
+}
+
+.drop-carousel .carousel-item img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    object-position: center;
+}
+
+.drop-caption {
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 16px 48px;
+    background: rgba(0, 0, 0, .48);
+    letter-spacing: .12em;
+    font-size: clamp(.8rem, 2vw, 1rem);
+    pointer-events: none;
+}
+
+.drop-arrow {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 44px;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, .45);
+    color: #fff;
+    font-size: 28px;
+}
+
+.drop-carousel button:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: -5px;
+}
+
+body>header {
+    border-bottom: 1px solid #dee2e6;
+}
+
+.hero-photo {
+    min-height: 240px;
+    aspect-ratio: 3 / 2;
+    background-image: linear-gradient(to top, rgba(0, 0, 0, .85), transparent 65%), url('../images/drop.jpg');
+    background-size: cover, 132% auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #212529;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, .7);
+}
+
+
+/* Product photos remain fully visible, with matching heights for both views. */
+.product-carousel .product-image {
+    height: auto;
+    aspect-ratio: 3 / 4;
+    object-fit: contain;
+    background: #fff;
+}
+
+.product-carousel .carousel-control-prev-icon,
+.product-carousel .carousel-control-next-icon {
+    filter: invert(1);
+}
+
+.product-carousel button:focus-visible {
+    outline: 3px solid #212529;
+    outline-offset: -5px;
 }

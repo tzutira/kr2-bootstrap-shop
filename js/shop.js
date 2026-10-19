@@ -18,6 +18,7 @@ const products = [
     "id": "2",
     "name": "Бордовая куртка",
     "image": "images/burgundy-leather-jacket.jpg",
+    "backImage": "images/burgundy-leather-jacket-back.png",
     "alt": "Бордовая куртка, цвет бордовый, вид спереди",
     "description": "Прямой силуэт, отложной воротник и застёжка\n              на молнии. Бордовый акцент для многослойных образов.",
     "price": "12 900 ₽",
@@ -33,7 +34,7 @@ const products = [
     "alt": "Кремовое поло на молнии, цвет кремовый, вид спереди",
     "description": "Трикотаж в рубчик, короткий рукав и воротник\n              с молнией. Светлая фактура для сочетания с широкими брюками.",
     "price": "3 200 ₽",
-    "badge": "База",
+    "badge": "",
     "badgeClass": "bg-secondary",
     "category": "Поло",
     "color": "Кремовый"
@@ -57,7 +58,7 @@ const products = [
     "alt": "Свитер Destroy Knit, цвет серый, вид спереди",
     "description": "Свободный серый трикотаж с намеренными потёртостями\n              и рваными краями. Фактурный акцент коллекции.",
     "price": "6 900 ₽",
-    "badge": "Коллекция",
+    "badge": "",
     "badgeClass": "bg-secondary",
     "category": "Свитеры",
     "color": "Серый"
@@ -69,7 +70,7 @@ const products = [
     "alt": "Белая свободная рубашка, цвет белый, вид спереди",
     "description": "Свободная посадка, классический воротник\n              и удлинённый округлый низ. Для самостоятельного\n              образа или второго слоя.",
     "price": "3 900 ₽",
-    "badge": "База",
+    "badge": "",
     "badgeClass": "bg-secondary",
     "category": "Рубашки",
     "color": "Белый"
@@ -87,9 +88,27 @@ if (document.querySelector("#product-details")) {
     const image = document.querySelector("#product-image");
     image.src = selectedProduct.image;
     image.alt = selectedProduct.alt;
+    if (selectedProduct.backImage) {
+      const gallery = document.querySelector("#productCarousel");
+      const slide = document.createElement("div");
+      slide.className = "carousel-item";
+      const backImage = document.createElement("img");
+      backImage.src = selectedProduct.backImage;
+      backImage.alt = `${selectedProduct.name}, вид сзади (сгенерированное изображение)`;
+      backImage.className = "d-block img-fluid rounded product-image";
+      backImage.width = 1200;
+      backImage.height = 1600;
+      slide.append(backImage);
+      gallery.querySelector(".carousel-inner").append(slide);
+      gallery.setAttribute("aria-roledescription", "карусель");
+      gallery.querySelectorAll("button[data-bs-slide]").forEach((button) => {
+        button.classList.remove("d-none");
+      });
+    }
     const badge = document.querySelector("#product-badge");
     badge.className = `badge ${selectedProduct.badgeClass} mb-3`;
     badge.textContent = selectedProduct.badge;
+    badge.hidden = !selectedProduct.badge;
     document.querySelector("#product-order-link").href = `order.html?product=${selectedProduct.id}`;
   } else {
     document.querySelector("#product-details").hidden = true;
